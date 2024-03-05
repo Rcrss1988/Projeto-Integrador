@@ -1,6 +1,6 @@
 # Projeto Integrador
 
-## Projeto cirado utilizando o GitHub e GitHub Desktop
+## Projeto criado utilizando o GitHub e GitHub Desktop
 
 Senac RS 03/2024
 
