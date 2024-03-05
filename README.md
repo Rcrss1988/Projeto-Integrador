@@ -1,5 +1,7 @@
 Sistema de Agendamento de Banhos para PET´s
+
 Status do Projeto: Em Desenvolvimento
+
 Tecnologias Aplicadas:
 
     Spring MVC: Construção da camada de controle do sistema.
