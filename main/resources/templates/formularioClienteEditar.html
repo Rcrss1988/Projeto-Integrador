@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Editar Cliente</title>
+
+    <!-- External Stylesheets -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- External Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <!-- Custom Script -->
+    <script src="/clientesFormularioEditarScript.js"></script>
+</head>
+<body class="container mt-4">
+    <h2 class="mb-4">Editar Cliente</h2>
+
+    <div id="errorMessages" class="text-danger"></div>
+
+    <!-- Form for Editing Client -->
+    <form th:object="${cliente}" th:action="@{/clientes/editar/{id}(id=${cliente.id})}" method="post" onsubmit="return validateForm();">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}" required>
+            <p th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="text-danger"></p>
+        </div>
+
+        <!-- CPF is not editable -->
+        <div class="form-group">
+            <label for="cpf">CPF:</label>
+            <input type="text" class="form-control" id="cpf" name="cpf" th:value="*{cpf}" readonly>
+        </div>
+
+        <div class="form-group">
+            <label for="endereco">Endereço:</label>
+            <input type="text" class="form-control" id="endereco" name="endereco" th:field="*{endereco}" required>
+            <p th:if="${#fields.hasErrors('endereco')}" th:errors="*{endereco}" class="text-danger"></p>
+        </div>
+
+        <div class="form-group">
+            <label for="telefone">Telefone:</label>
+            <input type="text" class="form-control" id="telefone" name="telefone" th:field="*{telefone}" required>
+            <p th:if="${#fields.hasErrors('telefone')}" th:errors="*{telefone}" class="text-danger"></p>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+
+    <!-- Back button to go back to the list of clients -->
+    <a th:href="@{/clientes}" class="btn btn-secondary mt-3">Voltar</a>
+</body>
+</html>

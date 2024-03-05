@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Clientes</title>
+    
+    <!-- Bootstrap CSS CDN (You can also download and host it locally) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Adicionando uma imagem ao cabeçalho -->
+    <style>
+        .header-image {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="container mt-4">
+    <!-- Sua imagem no cabeçalho -->
+    <img class="header-image" src="/petClubLogo.png" alt="Logo do Pet Club">
+
+    <h2 class="mb-4">Lista de Clientes</h2>
+
+    <!-- Button to Add a New Client -->
+    <a th:href="@{/clientes/adicionar}" class="btn btn-primary mb-2">Adicionar Cliente</a>
+    <a th:href="@{/banhos}" class="btn btn-secondary mb-2">Listar Banhos</a>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>Endereço</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.id}"></td>
+                <td th:text="${cliente.nome}"></td>
+                <td th:text="${cliente.cpf}"></td>
+                <td th:text="${cliente.endereco}"></td>
+                <td th:text="${cliente.telefone}"></td>
+                <td>
+                    <div class="btn-group">
+                        <a th:href="@{'/clientes/editar/' + ${cliente.id}}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{'/clientes/excluir/' + ${cliente.id}}" onclick="confirmDelete(${cliente.id})"
+                           class="btn btn-danger btn-sm">Excluir</a>
+                        <a th:href="@{/pets/listarPets/{clienteId}(clienteId=${cliente.id})}"
+                           class="btn btn-info btn-sm">PET´s cadastrados</a>
+                        <a th:href="@{/pets/adicionarPET/{clienteId}(clienteId=${cliente.id})}"
+                           class="btn btn-success btn-sm">Adicionar PET</a>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Bootstrap JS and Popper.js CDN (Required for Bootstrap functionality) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Separate JavaScript File -->
+<script src="/listaClientesScript.js"></script>
+
+<!-- Footer with WhatsApp and Instagram links, and RSenna TechArtes signature -->
+<footer class="text-center mt-4">
+    <p>
+        <a href="https://wa.me/5534992301817" target="_blank">
+            <img src="whatsapp_logo.png" alt="WhatsApp Logo" style="width: 48px; height: 48px; vertical-align: middle;">
+        </a>
+        <a href="https://www.instagram.com/clubepet_udi/" target="_blank">
+            <img src="instagram_logo.png" alt="Instagram Logo" style="width: 48px; height: 48px; vertical-align: middle;">
+        </a>
+    </p>
+    <p>© 2024 RSenna TechArtes. Todos os direitos reservados.</p>
+</footer>
+
+</body>
+</html>

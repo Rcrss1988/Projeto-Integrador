@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pets por Cliente</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Lista de Pets de <span th:text="${cliente.nome}"></span></h2>
+
+        <!-- Display List of Dogs -->
+        <table class="table table-bordered">
+            <thead class="thead-light">
+                <tr>
+                    <th>Nome do Pet</th>
+                    <th>Espécie</th>
+                    <th>Cor</th>
+                    <th>Porte</th>
+                    <th>Ações</th>
+                    <!-- Add more columns as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Use Thymeleaf loop to iterate over the list of Dogs -->
+                <tr th:each="dog : ${pets}">
+                    <!-- Display Dog Information -->
+                    <td th:text="${dog.nome}"></td>
+                    <td th:text="${dog.especie}"></td>
+                    <td th:text="${dog.cor}"></td>
+                    <td th:text="${dog.porte}"></td>
+                    <!-- Add buttons for editing, deleting, and scheduling a bath -->
+                    <td>
+                        <a th:href="@{'/pets/editarPET/' + ${dog.id}}" class="btn btn-warning btn-sm">Editar</a>
+                        <a th:href="@{'/pets/excluirPET/' + ${dog.id}}" class="btn btn-danger btn-sm">Excluir</a>
+                        <a th:href="@{'/agendar-banho/' + ${dog.id}}" class="btn btn-success btn-sm">Agendar Banho</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Add a link to navigate back to the clients page -->
+        <a th:href="@{/clientes}" class="btn btn-secondary mt-3">Voltar</a>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

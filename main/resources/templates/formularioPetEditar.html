@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar PET</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2>Editar PET</h2>
+
+    <!-- Form for Editing Client -->
+    <form th:object="${pet}" th:action="@{/pets/editarPET/{petId}(petId=${pet.id})}" method="post">
+
+        <!-- Pet Name -->
+        <div class="form-group">
+            <label for="nome">Nome do PET:</label>
+            <input type="text" id="nome" name="nome" th:field="*{nome}" class="form-control" required>
+        </div>
+
+        <!-- Pet Breed Dropdown -->
+        <div class="form-group">
+            <label for="especie">Raça do PET:</label>
+            <select id="especie" name="especie" th:field="*{especie}" class="form-control" required>
+                <option value="" disabled selected>Selecione a raça</option>
+                <option value="Vira-lata">Vira-lata</option>
+                <option value="Labrador Retriever">Labrador Retriever</option>
+                <option value="Golden Retriever">Golden Retriever</option>
+                <option value="Bulldog Inglês">Bulldog Inglês</option>
+                <option value="Poodle">Poodle</option>
+                <option value="Beagle">Beagle</option>
+                <option value="Boxer">Boxer</option>
+                <option value="Dachshund">Dachshund (Teckel)</option>
+                <option value="Chihuahua">Chihuahua</option>
+                <option value="Pastor Alemão">Pastor Alemão</option>
+                <option value="Rottweiler">Rottweiler</option>
+                <option value="Husky Siberiano">Husky Siberiano</option>
+                <option value="Shih Tzu">Shih Tzu</option>
+                <option value="Pug">Pug</option>
+                <option value="Shiba Inu">Shiba Inu</option>
+                <option value="Doberman">Doberman</option>
+                <option value="Border Collie">Border Collie</option>
+                <option value="Cocker Spaniel">Cocker Spaniel</option>
+                <option value="Great Dane">Great Dane (Dogue Alemão)</option>
+                <option value="Bernese Mountain Dog">Bernese Mountain Dog</option>
+                <option value="Dálmata">Dálmata</option>
+                <option value="Akita">Akita</option>
+                <option value="Bichon Frisé">Bichon Frisé</option>
+                <option value="Mastiff">Mastiff</option>
+                <option value="Papillon">Papillon</option>
+                <option value="Galgo">Galgo</option>
+                <option value="Basset Hound">Basset Hound</option>
+                <option value="São Bernardo">São Bernardo</option>
+                <option value="Pastor Australiano">Pastor Australiano</option>
+                <option value="Cão de Água Português">Cão de Água Português</option>
+                <option value="Lhasa Apso">Lhasa Apso</option>
+            </select>
+        </div>
+
+        <!-- Pet Color -->
+        <div class="form-group">
+            <label for="cor">Cor do PET:</label>
+            <select id="cor" name="cor" th:field="*{cor}" class="form-control" required>
+                <option value="" disabled selected>Selecione a cor</option>
+                <option value="Preto">Preto</option>
+                <option value="Branco">Branco</option>
+                <option value="Marrom">Marrom</option>
+                <option value="Creme">Creme</option>
+                <option value="Dourado">Dourado</option>
+                <option value="Amarelo">Amarelo</option>
+                <option value="Cinzento">Cinzento</option>
+                <option value="Azul">Azul</option>
+                <option value="Isabella">Isabella (tom mais claro de marrom)</option>
+                <option value="Ruívo">Ruívo</option>
+                <option value="Fulvo">Fulvo</option>
+                <option value="Chocolate">Chocolate</option>
+                <option value="Prata">Prata</option>
+                <option value="Tricolor">Tricolor (preto, branco e marrom)</option>
+                <option value="Bicolor">Bicolor (duas cores distintas)</option>
+                <option value="Merle">Merle (padrão com manchas e/ou marmorizado)</option>
+                <option value="Arlequim">Arlequim (combinação de branco com manchas pretas)</option>
+                <option value="Tigrado">Tigrado (listras escuras sobre uma cor de base)</option>
+                <option value="Sable">Sable (pontas escuras nas pontas dos pelos)</option>
+                <option value="Particolor">Particolor (manchas grandes de cores diferentes)</option>
+                <option value="Malhado">Malhado (manchas irregulares de cor)</option>
+                <option value="Abricó">Abricó (cor clara com tons de rosa ou pêssego)</option>
+                <option value="Azul e Castanho">Azul e Castanho (combinação de azul e marrom)</option>
+                <option value="Fígado">Fígado (tom de marrom mais escuro)</option>
+                <option value="Creme Sable">Creme Sable (combinação de creme com pontas escuras)</option>
+            </select>
+        </div>
+
+        <!-- Pet Size/Breed -->
+        <div class="form-group">
+            <label for="porte">Porte do PET:</label>
+            <select id="porte" name="porte" th:field="*{porte}" class="form-control" required>
+                <option value="" disabled selected>Selecione o porte</option>
+                <option value="Miniatura ou Toy (até 5 kg)">Miniatura ou Toy (até 5 kg)</option>
+                <option value="Pequeno (5 - 10 kg)">Pequeno (5 - 10 kg)</option>
+                <option value="Médio (11 - 25 kg)">Médio (11 - 25 kg)</option>
+                <option value="Grande (26 - 45 kg)">Grande (26 - 45 kg)</option>
+                <option value="Gigante (mais de 45 kg)">Gigante (mais de 45 kg)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+    </form>
+
+    <!-- Back button to go back to the list of clients -->
+    <a th:href="@{/clientes}" class="btn btn-secondary mt-3">Voltar</a>
+</div>
+
+<!-- Add Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Banho</title>
+
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+<h2 class="mb-4">Editar Banho</h2>
+
+<form th:action="@{/editar-banho/{id}(id=${banho.id})}" th:object="${banho}" method="post" class="needs-validation" novalidate>
+
+    <!-- Hidden field for the ID -->
+    <input type="hidden" th:field="*{id}" />
+
+    <!-- Scheduled Date and Time -->
+    <div class="form-group">
+        <label for="dataAgendamento">Data e Hora do Agendamento:</label>
+        <input type="datetime-local" id="dataAgendamento" th:field="*{dataAgendamento}" class="form-control" required/>
+        <div class="invalid-feedback">Por favor, selecione a data e hora do agendamento.</div>
+    </div>
+
+    <!-- Observations -->
+    <div class="form-group">
+        <label for="observacoes">Observações:</label>
+        <textarea id="observacoes" th:field="*{observacoes}" rows="4" class="form-control"></textarea>
+    </div>
+
+    <!-- Status -->
+    <div class="form-group">
+        <label for="status">Status:</label>
+        <select id="status" th:field="*{status}" class="form-control" required>
+            <option value="Agendado">Agendado</option>
+            <option value="Cancelado">Cancelado</option>
+            <option value="Cumprido">Cumprido</option>
+        </select>
+        <div class="invalid-feedback">Por favor, selecione o status.</div>
+    </div>
+
+    <!-- Valor -->
+    <div class="form-group">
+        <label for="valor">Valor:</label>
+        <input type="number" id="valor" th:field="*{valor}" step="0.01" class="form-control" required/>
+        <div class="invalid-feedback">Por favor, insira o valor.</div>
+    </div>
+
+    <!-- Pet ID (hidden, assuming you do not want to edit the associated pet) -->
+    <input type="hidden" th:field="*{pet.id}" />
+
+    <!-- Submit Button -->
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+
+<!-- Link back to the list of scheduled baths -->
+<a th:href="@{/banhos}" class="mt-3 d-block">Voltar para a Lista de Banhos</a>
+
+<!-- Add Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</body>
+</html>

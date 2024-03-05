@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Banhos</title>
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        td a {
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body class="container">
+
+    <h1 class="mt-4">Lista de Banhos</h1>
+
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th>ID</th>
+                <th>Pet</th>
+                <th>Data Agendamento</th>
+                <th>Observações</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate over the list of Banhos -->
+            <tr th:each="banho : ${banhos}">
+                <td th:text="${banho.id}"></td>
+                <td th:text="${banho.pet.nome}"></td>
+                <td th:text="${banho.dataAgendamento != null ? #temporals.format(banho.dataAgendamento, 'dd/MM/yyyy HH:mm') : 'N/A'}"></td>
+                <td th:text="${banho.observacoes}"></td>
+                <td th:text="${banho.valor}"></td>
+                <td th:text="${banho.status}"></td>
+                <td>
+                    <a th:href="@{'/editar-banho/' + ${banho.id}}" class="btn btn-primary btn-sm">Editar</a>
+                    <a th:href="@{'/excluir-banho/' + ${banho.id}}" onclick="confirmDelete(${banho.id})"
+                       class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Back button to go back to the list of clients -->
+    <a th:href="@{/clientes}" class="btn btn-secondary mt-3">Voltar</a>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>

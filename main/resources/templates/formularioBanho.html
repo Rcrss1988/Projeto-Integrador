@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Banho</title>
+
+    <!-- Add Bootstrap CSS link -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-5">
+
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 class="text-center mb-4">Agendar Banho para <span th:text="${pet.nome}"></span></h1>
+
+            <!-- Formulário para agendar banho -->
+            <form action="/agendar-banho/{petId}" method="post" th:object="${banho}" th:action="@{'/agendar-banho/' + ${pet.id}}"
+                  class="needs-validation" novalidate>
+
+                <!-- Data e hora do agendamento -->
+                <div class="form-group">
+                    <label for="dataAgendamento">Data e Hora do Agendamento:</label>
+                    <input type="datetime-local" id="dataAgendamento" name="dataAgendamento" th:field="*{dataAgendamento}" 
+                           class="form-control" required>
+                    <div class="invalid-feedback">Por favor, selecione a data e hora do agendamento.</div>
+                </div>
+
+                <!-- Observações -->
+                <div class="form-group">
+                    <label for="observacoes">Observações:</label>
+                    <textarea id="observacoes" name="observacoes" th:field="*{observacoes}" class="form-control" 
+                              rows="4" cols="50"></textarea>
+                </div>
+
+                <!-- Valor do serviço -->
+                <div class="form-group">
+                    <label for="valor">Valor do Serviço:</label>
+                    <input type="number" id="valor" name="valor" th:field="*{valor}" step="0.01" class="form-control" required>
+                    <div class="invalid-feedback">Por favor, insira o valor do serviço.</div>
+                </div>
+
+                <!-- ID do pet associado ao banho (hidden input) -->
+                <input type="hidden" id="petId" name="petId" th:value="${pet.id}" required>
+
+                <!-- Status (hidden input) -->
+                <input type="hidden" id="status" name="status" th:value="${status}" required>
+
+                <!-- Botão de envio do formulário -->
+                <button type="submit" class="btn btn-primary">Agendar Banho</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Add Bootstrap JS and Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+</html>
